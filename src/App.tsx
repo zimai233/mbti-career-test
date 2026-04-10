@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { AppPhase, Answer, UserProfile, CareerMatch } from './types';
 import { questions } from './data/questions';
 import { calculateProfile, calculateCareerMatches, getMBTIType, getMBTIDescription } from './utils/calculation';
 import { Welcome } from './components/Welcome';
 import { QuestionCard } from './components/QuestionCard';
-import { ResultCard } from './components/ResultCard';
+const ResultCard = lazy(() => import('./components/ResultCard').then(m => ({ default: m.ResultCard })));
 
 function App() {
   const [phase, setPhase] = useState<AppPhase>('welcome');
@@ -108,12 +108,18 @@ function App() {
 
   if (phase === 'result' && profile && careerMatches.length > 0) {
     return (
-      <ResultCard
-        careerMatches={careerMatches}
-        profile={profile}
-        mbtiType={mbtiType}
-        mbtiDescription={mbtiDescription}
-      />
+      <Suspense fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-white">加载中...</div>
+        </div>
+      }>
+        <ResultCard
+          careerMatches={careerMatches}
+          profile={profile}
+          mbtiType={mbtiType}
+          mbtiDescription={mbtiDescription}
+        />
+      </Suspense>
     );
   }
 
