@@ -17,46 +17,8 @@ function App() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem('mbti-answers');
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        if (parsed.phase === 'result' && parsed.profile) {
-          setPhase('result');
-          setProfile(parsed.profile);
-          setCareerMatches(parsed.careerMatches);
-          setMbtiType(parsed.mbtiType);
-          setMbtiDescription(parsed.mbtiDescription);
-        } else if (parsed.phase && parsed.answers && parsed.phase === 'testing') {
-          setPhase('testing');
-          setAnswers(parsed.answers);
-          setCurrentQuestion(parsed.currentQuestion || 0);
-        }
-      } catch (e) {
-        localStorage.removeItem('mbti-answers');
-      }
-    }
+    localStorage.removeItem('mbti-answers');
   }, []);
-
-  useEffect(() => {
-    if (phase === 'result' && profile) {
-      localStorage.setItem('mbti-answers', JSON.stringify({
-        phase: 'result',
-        profile,
-        careerMatches,
-        mbtiType,
-        mbtiDescription,
-      }));
-    } else if (phase === 'testing') {
-      localStorage.setItem('mbti-answers', JSON.stringify({
-        phase,
-        answers,
-        currentQuestion,
-      }));
-    } else if (phase === 'welcome') {
-      localStorage.removeItem('mbti-answers');
-    }
-  }, [phase, answers, currentQuestion, profile, careerMatches, mbtiType, mbtiDescription]);
 
   const handleStart = () => {
     setPhase('testing');
