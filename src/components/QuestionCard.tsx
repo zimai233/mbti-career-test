@@ -26,68 +26,61 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 relative">
-      <div className="absolute inset-0 bg-gradient-to-br from-cosmic-950 via-cosmic-900 to-cosmic-950" />
-      
-      <div className="relative z-10 w-full max-w-2xl">
+    <div className="min-h-screen flex flex-col p-6">
+      <div className="max-w-xl w-full mx-auto flex-1 flex flex-col">
         <ProgressBar current={questionNumber} total={totalQuestions} />
 
-        <div className="bg-cosmic-950/40 backdrop-blur-xl border border-cosmic-700/30 rounded-3xl p-8 md:p-12 animate-slide-up">
-          <div className="text-center mb-8">
-            <span className="inline-block px-4 py-1 bg-cosmic-800/50 text-cosmic-300 text-sm rounded-full mb-4">
+        <div className="bg-white rounded-3xl shadow-soft-lg p-8 flex-1 flex flex-col mt-6 animate-fade-in">
+          <div className="flex items-center gap-3 mb-6">
+            <span className="px-3 py-1 bg-primary-100 text-primary-700 text-sm font-medium rounded-full">
               问题 {questionNumber}
             </span>
-            <h2 className="font-display text-2xl md:text-3xl text-white leading-relaxed">
-              {question.text}
-            </h2>
+            <span className="text-soft-400 text-sm">
+              共 {totalQuestions} 题
+            </span>
           </div>
 
-          <div className="space-y-3">
+          <h2 className="font-display text-xl text-soft-800 mb-8 leading-relaxed">
+            {question.text}
+          </h2>
+
+          <div className="space-y-3 flex-1">
             {question.options.map((option, index) => (
               <button
                 key={index}
                 onClick={() => handleSelect(index, option.value)}
                 disabled={selectedIndex !== null}
                 className={`
-                  w-full p-4 text-left rounded-xl border transition-all duration-300 font-body
+                  w-full p-4 text-left rounded-xl border-2 transition-all duration-200 cursor-pointer
                   ${selectedIndex === index 
-                    ? 'bg-cosmic-600/50 border-cosmic-400 text-white scale-[1.02]' 
-                    : 'bg-cosmic-900/30 border-cosmic-700/30 text-cosmic-200 hover:bg-cosmic-800/50 hover:border-cosmic-600/50 hover:text-white'
+                    ? 'bg-primary-50 border-primary-400 text-primary-800 shadow-soft' 
+                    : 'bg-soft-50 border-soft-200 text-soft-700 hover:bg-primary-50 hover:border-primary-300 hover:text-primary-800'
                   }
                 `}
               >
-                <span className="flex items-center gap-3">
+                <div className="flex items-center gap-4">
                   <span className={`
-                    w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs transition-all
+                    w-8 h-8 flex items-center justify-center rounded-lg font-medium text-sm transition-colors
                     ${selectedIndex === index 
-                      ? 'border-cosmic-400 bg-cosmic-400 text-cosmic-950' 
-                      : 'border-cosmic-600'
+                      ? 'bg-primary-500 text-white' 
+                      : 'bg-white border-2 border-soft-200 text-soft-500'
                     }
                   `}>
-                    {selectedIndex === index && '✓'}
+                    {selectedIndex === index ? (
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    ) : (
+                      String.fromCharCode(65 + index)
+                    )}
                   </span>
-                  {option.text}
-                </span>
+                  <span className="font-body">
+                    {option.text}
+                  </span>
+                </div>
               </button>
             ))}
           </div>
-        </div>
-
-        <div className="flex justify-center mt-8 gap-2">
-          {Array.from({ length: totalQuestions }).map((_, i) => (
-            <div
-              key={i}
-              className={`
-                w-2 h-2 rounded-full transition-all duration-300
-                ${i < questionNumber - 1 
-                  ? 'bg-cosmic-400' 
-                  : i === questionNumber - 1 
-                    ? 'bg-violet-400 w-4' 
-                    : 'bg-cosmic-800'
-                }
-              `}
-            />
-          ))}
         </div>
       </div>
     </div>

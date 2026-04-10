@@ -64,16 +64,14 @@ function App() {
   if (isAnalyzing) {
     return (
       <div className="min-h-screen flex items-center justify-center p-4">
-        <div className="absolute inset-0 bg-gradient-to-br from-cosmic-950 via-cosmic-900 to-cosmic-950" />
-        
-        <div className="relative z-10 text-center">
-          <div className="text-8xl mb-8 animate-float">🔮</div>
-          <h2 className="font-display text-3xl text-white mb-4">正在分析你的性格密码...</h2>
-          <div className="flex justify-center gap-2">
-            <div className="w-3 h-3 bg-cosmic-400 rounded-full animate-bounce" style={{ animationDelay: '0s' }} />
-            <div className="w-3 h-3 bg-violet-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
-            <div className="w-3 h-3 bg-gold-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
+        <div className="bg-white rounded-3xl shadow-soft-lg p-10 text-center animate-fade-in">
+          <div className="w-16 h-16 mx-auto mb-6 bg-primary-100 rounded-2xl flex items-center justify-center">
+            <svg className="w-8 h-8 text-primary-600 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
           </div>
+          <h2 className="font-display text-2xl text-soft-800 mb-2">正在分析你的性格密码...</h2>
+          <p className="text-soft-500 font-body">请稍候</p>
         </div>
       </div>
     );

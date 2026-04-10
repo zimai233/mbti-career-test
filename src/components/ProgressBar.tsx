@@ -9,14 +9,14 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({ current, total }) => {
   const percentage = Math.round((current / total) * 100);
 
   return (
-    <div className="w-full mb-8">
-      <div className="flex justify-between text-sm text-cosmic-300 mb-2 font-body">
+    <div className="w-full">
+      <div className="flex justify-between text-sm text-soft-500 mb-2 font-body">
         <span>问题 {current} / {total}</span>
-        <span>{percentage}%</span>
+        <span className="text-primary-600 font-medium">{percentage}%</span>
       </div>
-      <div className="h-2 bg-cosmic-950/50 rounded-full overflow-hidden backdrop-blur-sm">
+      <div className="h-2 bg-soft-200 rounded-full overflow-hidden">
         <div
-          className="h-full bg-gradient-to-r from-cosmic-500 via-violet-500 to-gold-500 rounded-full transition-all duration-500 ease-out"
+          className="h-full bg-gradient-to-r from-primary-500 to-primary-600 rounded-full transition-all duration-500 ease-out"
           style={{ width: `${percentage}%` }}
         />
       </div>
