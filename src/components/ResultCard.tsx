@@ -204,10 +204,10 @@ export const ResultCard: React.FC<ResultCardProps> = ({
           </div>
         </div>
 
-        <div className="text-center mt-12 animate-slide-up" style={{ animationDelay: '0.9s' }}>
+        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 animate-fade-in">
           <button
             onClick={onReset}
-            className="px-8 py-3 bg-cosmic-800/50 border border-cosmic-600/30 text-cosmic-200 font-body rounded-full hover:bg-cosmic-700/50 transition-all"
+            className="px-8 py-3 bg-cosmic-800/50 border border-cosmic-600/30 text-cosmic-200 font-body rounded-full hover:bg-cosmic-700/50 transition-all shadow-lg backdrop-blur-sm"
           >
             重新测试
           </button>
