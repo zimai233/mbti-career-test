@@ -64,6 +64,17 @@ function App() {
     setAnswers([]);
   };
 
+  const handleReset = () => {
+    localStorage.removeItem('mbti-answers');
+    setPhase('welcome');
+    setCurrentQuestion(0);
+    setAnswers([]);
+    setProfile(null);
+    setCareerMatches([]);
+    setMbtiType('');
+    setMbtiDescription('');
+  };
+
   const handleAnswer = (answer: Answer) => {
     const newAnswers = [...answers, answer];
     setAnswers(newAnswers);
@@ -128,6 +139,7 @@ function App() {
         profile={profile}
         mbtiType={mbtiType}
         mbtiDescription={mbtiDescription}
+        onReset={handleReset}
       />
     );
   }

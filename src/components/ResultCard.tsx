@@ -8,6 +8,7 @@ interface ResultCardProps {
   profile: UserProfile;
   mbtiType: string;
   mbtiDescription: string;
+  onReset: () => void;
 }
 
 export const ResultCard: React.FC<ResultCardProps> = ({
@@ -15,6 +16,7 @@ export const ResultCard: React.FC<ResultCardProps> = ({
   profile,
   mbtiType,
   mbtiDescription,
+  onReset,
 }) => {
   const topMatch = careerMatches[0];
   const secondaryMatch = careerMatches[1];
@@ -204,7 +206,7 @@ export const ResultCard: React.FC<ResultCardProps> = ({
 
         <div className="text-center mt-12 animate-slide-up" style={{ animationDelay: '0.9s' }}>
           <button
-            onClick={() => window.location.reload()}
+            onClick={onReset}
             className="px-8 py-3 bg-cosmic-800/50 border border-cosmic-600/30 text-cosmic-200 font-body rounded-full hover:bg-cosmic-700/50 transition-all"
           >
             重新测试
